@@ -1,0 +1,17 @@
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.exe
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.csprojAssemblyReference.cache
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.AssemblyInfoInputs.cache
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.AssemblyInfo.cs
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\IronSnappy.dll
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\Parquet.dll
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.csproj.CopyComplete
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.deps.json
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.runtimeconfig.json
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.runtimeconfig.dev.json
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.dll
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\jsonToParquet.pdb
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.csproj.CoreCompileInputs.cache
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.dll
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.pdb
+C:\Users\Oran\source\repos\jsonToParquet\jsonToParquet\obj\Debug\netcoreapp3.1\jsonToParquet.genruntimeconfig.cache
