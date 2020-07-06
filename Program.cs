@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Parquet;
@@ -9,25 +8,26 @@ using Parquet.Data;
 
 namespace jsonToParquet
 {
-    class Program
+    public class Program
     {
+        private static string IN_PATH = @"Data\";
+        private static string OUT_PATH = @"parquet\";
         static void Main(string[] args)
         {
-            GenerateParquetFile();
+            GenerateParquetFilesFromDirectory(IN_PATH, OUT_PATH);
+            //DummyParquetFileGenerator.GenerateGiantParquetFile();
             Console.ReadLine();
         }
 
-
-        public static void GenerateParquetFile()
+        public static void GenerateParquetFilesFromDirectory(string inPath, string outPath)
         {
-            int fileSuffix = 1;
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\");
-            List<string> licensePlateList = new List<string>();
-            List<int> sensorList = new List<int>();
-            List<string> timeList = new List<string>();
-
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), inPath);
             foreach (string file in Directory.EnumerateFiles(path, "*.json"))
             {
+                var result = Path.ChangeExtension(file, ".parquet");
+                var licensePlateList = new List<string>();
+                var sensorList = new List<int>();
+                var timeList = new List<string>();
                 string[] jsonLines = File.ReadAllLines(file);
                 foreach (string json in jsonLines)
                 {
@@ -36,8 +36,6 @@ namespace jsonToParquet
                     sensorList.Add(carData.Sensor);
                     timeList.Add(carData.Time);
                 }
-
-
                 var licensePlateColumn = new DataColumn(
                 new DataField<string>("LicensePlate"),
                 licensePlateList.ToArray());
@@ -50,25 +48,28 @@ namespace jsonToParquet
                    new DataField<string>("Time"),
                    timeList.ToArray());
 
-                var schema = new Schema(licensePlateColumn.Field, sensorColumn.Field, timeColumn.Field);
+                var outPutPath = outPath + Path.GetFileName(Path.ChangeExtension(file, ".parquet"));
+                BuildParquetFile(licensePlateColumn, sensorColumn, timeColumn, outPutPath);
+            }
+            Console.WriteLine("Done converting JSONL files to Parquet!");
+        }
 
-                using (Stream fileStream = System.IO.File.Create("parquet\\carData" + fileSuffix + ".parquet"))
+        public static void BuildParquetFile(DataColumn license, DataColumn sensor, DataColumn time, string outPath)
+        {
+            var schema = new Schema(license.Field, sensor.Field, time.Field);
+            using (Stream fileStream = File.Create(outPath))
+            {
+                using (var parquetWriter = new ParquetWriter(schema, fileStream))
                 {
-                    using (var parquetWriter = new ParquetWriter(schema, fileStream))
+                    parquetWriter.CompressionMethod = CompressionMethod.Gzip;
+                    using (ParquetRowGroupWriter groupWriter = parquetWriter.CreateRowGroup())
                     {
-                        // create a new row group in the file
-                        using (ParquetRowGroupWriter groupWriter = parquetWriter.CreateRowGroup())
-                        {
-                            groupWriter.WriteColumn(licensePlateColumn);
-                            groupWriter.WriteColumn(sensorColumn);
-                            groupWriter.WriteColumn(timeColumn);
-                        }
+                        groupWriter.WriteColumn(license);
+                        groupWriter.WriteColumn(sensor);
+                        groupWriter.WriteColumn(time);
                     }
                 }
-                fileSuffix++;
             }
-
-            Console.WriteLine("Done!");
         }
 
         public class CarData
