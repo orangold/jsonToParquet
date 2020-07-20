@@ -15,7 +15,6 @@ namespace jsonToParquet
         static void Main(string[] args)
         {
             GenerateParquetFilesFromDirectory(IN_PATH, OUT_PATH);
-            //DummyParquetFileGenerator.GenerateGiantParquetFile();
             Console.ReadLine();
         }
 
